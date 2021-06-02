@@ -5,8 +5,9 @@
 </template>
 
 <script>
+import SubmitForm from "../components/SubmitForm.vue"
 export default {
-    import SubmitForm from "../components/SubmitForm.vue"
+    components: { SubmitForm },
 }
 </script>
 
