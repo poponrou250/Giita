@@ -3,7 +3,9 @@
       <h1>Giita</h1>
       <div class="header-list">
         <ul>
+          <router-link to="/">ホーム</router-link> |
           <router-link to="/about">投稿</router-link>|
+          <router-link to="/my-page">マイページ</router-link>|
           <li>ログイン</li>
           <li>新規登録</li>
         </ul>
