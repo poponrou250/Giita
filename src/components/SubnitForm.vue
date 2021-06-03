@@ -89,7 +89,7 @@ export default {
 }
 .form__textarea {
   width: 95%;
-  height: calc(1.3rem * 3 + 0.5rem * 2);
+  height: calc(1.3rem * 3 + 0.5rem * 70);
   padding: 0.5rem;
   line-height: 1.3rem;
   border-radius: 5px;

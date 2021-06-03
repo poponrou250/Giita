@@ -14,8 +14,8 @@ export default {
 <style scoped>
 .home__wrapper {
   margin: 0 auto;
-  max-width: 600px;
-  background-color: #ccc;
+  max-width: 6000px;
+  background-color: rgb(208, 243, 192);
 }
 
 </style>
