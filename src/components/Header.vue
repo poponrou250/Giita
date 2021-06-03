@@ -3,7 +3,7 @@
       <h1>Giita</h1>
       <div class="header-list">
         <ul>
-          <li>投稿</li>
+          <router-link to="/about">投稿</router-link>|
           <li>ログイン</li>
           <li>新規登録</li>
         </ul>

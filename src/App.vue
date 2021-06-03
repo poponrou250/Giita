@@ -1,7 +1,6 @@
 <template>
   <div>
     <Header /> <!-- componentを利用 -->
-
     <div class="app">
       <button v-on:click="postTweet">ツイート</button>
       <div>
@@ -10,23 +9,19 @@
         </p>
       </div>
     </div>
-
+    <router-view />
   </div>
 </template>
 
 <script>
-
 // import
 import firebase from "firebase";
 import Header from "@/components/Header.vue";
-
 export default {
-
 // componentの登録
   components: {
     Header, 
   },
-
    data() {
     return {
       tweets: [
