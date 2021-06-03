@@ -1,21 +1,20 @@
 <template>
-  <div class="home__wrapper">
+  <div class="Post__wrapper">
     <submit-form />
   </div>
 </template>
 
 <script>
-import SubmitForm from "../components/SubnitForm.vue"
+import SubmitForm from "./SubnitForm.vue"
 export default {
-  components: { SubmitForm },
+    components: { SubmitForm },
 }
 </script>
 
 <style scoped>
-.home__wrapper {
+.Post__wrapper {
   margin: 0 auto;
   max-width: 600px;
   background-color: #ccc;
 }
-
 </style>
