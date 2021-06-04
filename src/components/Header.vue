@@ -1,20 +1,22 @@
 <template>
   <header>
-      <h1>Giita</h1>
-      <div class="header-list">
-        <ul>
-          <router-link to="/">ホーム</router-link> |
-          <router-link to="/about">投稿</router-link>|
-          <router-link to="/my-page">マイページ</router-link>|
-          <li>ログイン</li>
-          <li>新規登録</li>
-        </ul>
-      </div>
-    </header>
+    <h1>Giita</h1>
+    <div class="header-list">
+      <ul>
+        <router-link to="/">ホーム</router-link>
+        |
+        <router-link to="/about">投稿</router-link
+        >|
+        <router-link to="/my-page">マイページ</router-link
+        >|
+        <li>ログイン</li>
+        <li>新規登録</li>
+      </ul>
+    </div>
+  </header>
 </template>
 
 <style>
-
 /* HeaderのCSS */
 
 /* ページ全体の余白を消す */
@@ -34,14 +36,12 @@ header {
 }
 
 header a {
-  text-decoration: none; 
+  text-decoration: none;
 }
-
 
 header h1 {
   margin-left: 20px;
 }
-
 
 .header-list {
   display: flex;
@@ -54,8 +54,7 @@ header ul {
 }
 
 header li {
-  list-style: none; 
+  list-style: none;
   margin-right: 40px;
 }
-
 </style>

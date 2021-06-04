@@ -17,5 +17,4 @@ export default {
   max-width: 6000px;
   background-color: rgb(208, 243, 192);
 }
-
 </style>
