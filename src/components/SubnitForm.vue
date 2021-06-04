@@ -3,14 +3,14 @@
     <div class="cp_iptxt">
 	    <input 
       type="text"
-      v-model="title"
+      v-model="titleText"
       placeholder="タイトル"
       />
 	    <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
   </div>
     <textarea
       class="form__textarea"
-      v-model="text"
+      v-model="articleContentText"
       placeholder="記事の内容"
     />
     <div class="form__buttons">
@@ -28,15 +28,17 @@ export default {
     return {
       tweets: [
         
-      ]
+      ],
+      titleText:"",
+      articleContentText:"",
     }
   },
   methods: {
      postTweet() {
       /* 変更点 */
       const tweet = {
-        title: this.title,
-        text: this.text,
+        title: this.titleText,
+        text: this.articleContentText,
       };
       firebase.firestore().collection("tweets")
         .add(tweet)
@@ -68,12 +70,7 @@ export default {
 	letter-spacing: 1px;
 	border: 0;
 }
-/* .cp_iptxt input[type='text']:focus {
-	outline: none;
-}
-.cp_iptxt input[type='text']:focus::after {
-	outline: none;
-} */
+
 .cp_iptxt i {
 	position: absolute;
 	top: 0;
