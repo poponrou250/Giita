@@ -9,6 +9,11 @@
       v-model="articleContentText"
       placeholder="記事の内容"
     />
+    <textarea
+      class="form__textarea"
+      v-model="codeContentText"
+      placeholder="code"
+    />
     <div class="form__buttons">
       <button v-on:click="postTweet" class="form__submit-button">投稿</button>
     </div>
@@ -23,6 +28,7 @@ export default {
       tweets: [],
       titleText: "",
       articleContentText: "",
+      codeContentText: "",
     }
   },
   methods: {
@@ -31,10 +37,11 @@ export default {
       const tweet = {
         title: this.titleText,
         text: this.articleContentText,
+        code: this.codeContentText,
       }
       firebase
         .firestore()
-        .collection("tweets")
+        .collection("posts")
         .add(tweet)
         .then((ref) => {
           this.tweets.push({
