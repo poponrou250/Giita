@@ -1,16 +1,16 @@
 <template>
-  <div>
-    <Header />
+  <v-app>
     <!-- componentを利用 -->
-    <div class="app">
-      <div>
-        <p v-for="tweet in tweets" :key="tweet.id">
-          {{ tweet.text }}
-        </p>
-      </div>
+    <Header />
+    <div>
+      <p v-for="tweet in tweets" :key="tweet.id">
+        {{ tweet.text }}
+      </p>
     </div>
-    <router-view />
-  </div>
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
@@ -21,6 +21,11 @@ export default {
   // componentの登録
   components: {
     Header,
+  },
+  data() {
+    return {
+      tweets: [],
+    }
   },
   created() {
     firebase
