@@ -14,6 +14,21 @@
       v-model="codeContentText"
       placeholder="code"
     />
+    <b-upload type="file" style="margin-top: 1rem" @change.native="uploadImage">
+      <a class="button is-info">
+        <b-icon
+          pack="fas"
+          icon="upload"
+          size="medium"
+          style="
+            margin-right: 0.5rem;
+            margin-bottom: 0.05rem;
+            vertical-align: middle;
+          "
+        ></b-icon>
+        プロフィール画像を変更する
+      </a>
+    </b-upload>
     <div class="form__buttons">
       <button v-on:click="postTweet" class="form__submit-button">投稿</button>
     </div>
@@ -22,32 +37,49 @@
 
 <script>
 import firebase from "firebase"
+// import moment from "moment"
 export default {
   data() {
     return {
-      tweets: [],
+      // tweets: [],
       titleText: "",
       articleContentText: "",
       codeContentText: "",
+      // displayName: "",
+      // imageURL: null,
+      moment: null,
     }
   },
   methods: {
+    // //選択したファイルを保存
+    // selectFile(e) {
+    //   this.$store.dispatch("selectFile", e)
+    // },
     postTweet() {
+      this.$store.dispatch("upload")
+      // this.moment = moment().format("YYYY-MM-DD")
       /* 変更点 */
       const tweet = {
         title: this.titleText,
         text: this.articleContentText,
         code: this.codeContentText,
+        // imageurl: this.$store.getters.imageURL,
+        moment: this.moment,
       }
       firebase
         .firestore()
         .collection("posts")
         .add(tweet)
         .then((ref) => {
-          this.tweets.push({
-            id: ref.id,
-            ...tweet,
-          })
+          console.log(this)
+          // this.tweets.push({
+          //   id: ref.id,
+          //   ...tweet,
+          // })
+          // this.$store.dispatch("initialize")
+        })
+        .catch(function (error) {
+          console.log("error", error)
         })
     },
   },
