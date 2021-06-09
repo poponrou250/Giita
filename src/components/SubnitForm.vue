@@ -29,6 +29,18 @@
         プロフィール画像を変更する
       </a>
     </b-upload>
+    <v-combobox
+      multiple
+      v-model="select"
+      label="Tags"
+      append-icon
+      chips
+      deletable-chips
+      class="tag-input"
+      :search-input.sync="search"
+      @keyup.tab="updateTags"
+      @paste="updateTags"
+    ></v-combobox>
     <div class="form__buttons">
       <button v-on:click="postTweet" class="form__submit-button">投稿</button>
     </div>
@@ -48,6 +60,7 @@ export default {
       // displayName: "",
       // imageURL: null,
       moment: null,
+      select: ["web", "iPhone", "game"],
     }
   },
   methods: {
@@ -70,7 +83,7 @@ export default {
         .firestore()
         .collection("posts")
         .add(tweet)
-        .then((ref) => {
+        .then((res) => {
           console.log(this)
           // this.tweets.push({
           //   id: ref.id,
@@ -81,6 +94,14 @@ export default {
         .catch(function (error) {
           console.log("error", error)
         })
+    },
+    updateTags() {
+      this.$nextTick(() => {
+        this.select.push(...this.search.split(","))
+        this.$nextTick(() => {
+          this.search = ""
+        })
+      })
     },
   },
 }
