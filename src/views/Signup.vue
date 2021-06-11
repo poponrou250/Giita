@@ -28,8 +28,10 @@ export default {
   methods: {
     signUp() {
       firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-      .then(()=> {
+      .then((userCredential)=> {
         alert('RegisterSuccess!');
+        var user = userCredential.user;
+        firebase.firestore().collection("users").doc(user.uid).set({email: this.email, password: this.password})
       })
       .catch(error => {
           alert("Error!", error.message)

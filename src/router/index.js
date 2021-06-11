@@ -33,7 +33,7 @@ const routes = [
   {
     path: '/signin',
     name: 'Signin',
-    component: Signin
+    component: Signin,
   },
 ]
 
