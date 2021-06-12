@@ -1,5 +1,11 @@
 import firebase from "firebase"
 import "firebase/firestore"
+// import store from "./store"
+
+// Vue.use(Vuetify, {
+//   iconfont: "md",
+// })
+// Vue.config.productionTip = false
 
 const firebaseConfig = {
   apiKey: "AIzaSyCsdDNSOnwk50vCoPJUtSRcp9yIKSzcWv0",
@@ -12,3 +18,4 @@ const firebaseConfig = {
 }
 
 firebase.initializeApp(firebaseConfig)
+export const db = firebase.firestore()
