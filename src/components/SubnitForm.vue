@@ -4,9 +4,11 @@
       <input type="text" v-model="titleText" placeholder="タイトル" />
       <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
     </div>
-    <textarea
+    <quill-editor
       class="form__textarea"
       v-model="articleContentText"
+      ref="quillEditor"
+      options="editorOption"
       placeholder="記事の内容"
     />
     <textarea
@@ -35,12 +37,21 @@
 
 <script>
 import firebase from "firebase"
+import Vue from "vue"
+import VueQuillEditor from "vue-quill-editor"
+import "quill/dist/quill.core.css"
+import "quill/dist/quill.snow.css"
+import "quill/dist/quill.bubble.css"
+Vue.use(VueQuillEditor)
 export default {
   data() {
     return {
       tweets: [],
       titleText: "",
       articleContentText: "",
+      editorOption: {
+        theme: "bubble",
+      },
       codeContentText: "",
       moment: null,
       tags: [],
@@ -86,6 +97,14 @@ export default {
       this.tags.splice(vm.$index, 1)
     },
   },
+  // props: {
+  //   options: {
+  //     type: Object,
+  //   },
+  //   options: {
+  //     type: editorOption,
+  //   },
+  // },
 }
 </script>
 
