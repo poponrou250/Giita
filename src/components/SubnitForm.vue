@@ -53,7 +53,7 @@ export default {
         title: this.titleText,
         text: this.articleContentText,
         code: this.codeContentText,
-        // moment: this.moment,
+        createAt: firebase.firestore.FieldValue.serverTimestamp(),
         tags: this.tags,
       }
       firebase
@@ -82,6 +82,7 @@ export default {
     },
     delete(vm) {
       // タグを消すときはタグの配列をspliceして削除
+      // 消えない→idでそれぞれのタグを識別できていないから？？
       this.tags.splice(vm.$index, 1)
     },
   },
