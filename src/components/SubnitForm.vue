@@ -14,33 +14,19 @@
       v-model="codeContentText"
       placeholder="code"
     />
-    <b-upload type="file" style="margin-top: 1rem" @change.native="uploadImage">
-      <a class="button is-info">
-        <b-icon
-          pack="fas"
-          icon="upload"
-          size="medium"
-          style="
-            margin-right: 0.5rem;
-            margin-bottom: 0.05rem;
-            vertical-align: middle;
-          "
-        ></b-icon>
-        プロフィール画像を変更する
-      </a>
-    </b-upload>
-    <v-combobox
-      multiple
-      v-model="select"
-      label="Tags"
-      append-icon
-      chips
-      deletable-chips
-      class="tag-input"
-      :search-input.sync="search"
-      @keyup.tab="updateTags"
-      @paste="updateTags"
-    ></v-combobox>
+    <div class="tag_textarea">
+      <div class="tag-list">
+        <span class="tag" v-for="(tag, key) in tags" :key="key.id">
+          {{ tag.name }}
+          <span class="delete" v-on:click="delete this">x</span>
+        </span>
+      </div>
+      <div
+        class="input-area"
+        contenteditable="true"
+        v-on:keydown.enter="decide_tag"
+      ></div>
+    </div>
     <div class="form__buttons">
       <button v-on:click="postTweet" class="form__submit-button">投稿</button>
     </div>
@@ -49,59 +35,54 @@
 
 <script>
 import firebase from "firebase"
-// import moment from "moment"
 export default {
   data() {
     return {
-      // tweets: [],
+      tweets: [],
       titleText: "",
       articleContentText: "",
       codeContentText: "",
-      // displayName: "",
-      // imageURL: null,
       moment: null,
-      select: ["web", "iPhone", "game"],
+      tags: [],
     }
   },
   methods: {
-    // //選択したファイルを保存
-    // selectFile(e) {
-    //   this.$store.dispatch("selectFile", e)
-    // },
     postTweet() {
-      this.$store.dispatch("upload")
-      // this.moment = moment().format("YYYY-MM-DD")
       /* 変更点 */
       const tweet = {
         title: this.titleText,
         text: this.articleContentText,
         code: this.codeContentText,
-        // imageurl: this.$store.getters.imageURL,
-        moment: this.moment,
+        // moment: this.moment,
+        tags: this.tags,
       }
       firebase
         .firestore()
         .collection("posts")
         .add(tweet)
-        .then((res) => {
+        .then((ref) => {
           console.log(this)
-          // this.tweets.push({
-          //   id: ref.id,
-          //   ...tweet,
-          // })
-          // this.$store.dispatch("initialize")
+          this.tweets.push({
+            id: ref.id,
+            ...tweet,
+          })
         })
         .catch(function (error) {
           console.log("error", error)
         })
     },
-    updateTags() {
-      this.$nextTick(() => {
-        this.select.push(...this.search.split(","))
-        this.$nextTick(() => {
-          this.search = ""
-        })
+    // v-onでエンターキー押してTagのpush
+    decide_tag(e) {
+      this.tags.push({
+        // id:
+        name: e.target.textContent,
       })
+      e.target.textContent = ""
+      // console.log(this.tags)
+    },
+    delete(vm) {
+      // タグを消すときはタグの配列をspliceして削除
+      this.tags.splice(vm.$index, 1)
     },
   },
 }
@@ -150,5 +131,32 @@ export default {
 .form__buttons {
   display: flex;
   justify-content: flex-end;
+}
+
+.tag_textarea {
+  width: auto;
+  height: 20px;
+  background: white;
+}
+
+.tag-list {
+  display: inline-block;
+  margin-top: 0px;
+}
+
+.input-area {
+  display: inline-block;
+  width: 100px;
+  height: 20px;
+  background: white;
+}
+
+.tag {
+  padding: 2px;
+  background: rgb(176, 178, 179);
+}
+
+.delete {
+  cursor: pointer;
 }
 </style>

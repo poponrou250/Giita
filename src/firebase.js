@@ -2,10 +2,10 @@ import firebase from "firebase"
 import "firebase/firestore"
 // import store from "./store"
 
-Vue.use(Vuetify, {
-  iconfont: "md",
-})
-Vue.config.productionTip = false
+// Vue.use(Vuetify, {
+//   iconfont: "md",
+// })
+// Vue.config.productionTip = false
 
 const firebaseConfig = {
   apiKey: "AIzaSyCsdDNSOnwk50vCoPJUtSRcp9yIKSzcWv0",
