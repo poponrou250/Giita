@@ -9,14 +9,17 @@
         >|
         <router-link to="/my-page">マイページ</router-link
         >|
-        <li>ログイン</li>
-        <li>新規登録</li>
+        <router-link to="/signup">SignUp</router-link
+        >|
+        <router-link to="/signin">SignIn</router-link
+        >|
+        <button v-on:click="signOut">SingOut</button>
       </ul>
     </div>
   </header>
 </template>
 
-<style>
+<style scoped>
 /* HeaderのCSS */
 
 /* ページ全体の余白を消す */
@@ -58,3 +61,26 @@ header li {
   margin-right: 40px;
 }
 </style>
+
+<script>
+import firebase from "firebase"
+
+export default {
+
+  methods: {
+    signOut() {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        alert("Logout!");
+      })
+      .catch(error => {
+        alert(error);
+      });
+    }
+  }
+  
+};
+
+</script>
