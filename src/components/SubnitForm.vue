@@ -8,7 +8,7 @@
       class="form__textarea"
       v-model="articleContentText"
       ref="quillEditor"
-      options="editorOption"
+      v-bind:options="editorOption"
       placeholder="記事の内容"
     />
     <textarea
