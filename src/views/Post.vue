@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import SubmitForm from "../components/SubnitForm.vue"
+import SubmitForm from "../components/SubmitForm.vue"
 export default {
   components: { SubmitForm },
 }
