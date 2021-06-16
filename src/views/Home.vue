@@ -23,20 +23,6 @@ export default {
       tweets: [],
     }
   },
-  created() {
-    firebase
-      .firestore()
-      .collection("tweets")
-      .get()
-      .then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          this.tweets.push({
-            id: doc.id,
-            ...doc.data(),
-          })
-        })
-      })
-  },
 }
 </script>
 
