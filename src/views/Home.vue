@@ -19,6 +19,12 @@
         <div class="text">
           <!-- {{ post.text }} -->
         </div>
+
+        <div class="link">
+          <router-link :to="{ name: 'Show', params: { post_id: post.id } }"
+            >詳細</router-link
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -53,16 +59,21 @@ export default {
     filteredPosts: function () {
       let posts = []
 
-      for (let i in this.posts) {
-        let post = this.posts[i]
-        for (let j in post.tags) {
-          let tag = post.tags[j]
-          if (tag.name.indexOf(this.keyword) !== -1) {
-            posts.push(post)
+      if (this.keyword) {
+        for (let i in this.posts) {
+          const post = this.posts[i]
+          for (let j in post.tags) {
+            const tag = post.tags[j]
+            if (tag.name === this.keyword) {
+              posts.push(post)
+              break
+            }
           }
         }
+        return posts
+      } else {
+        return this.posts
       }
-      return posts
     },
   },
 }
