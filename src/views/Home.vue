@@ -1,14 +1,13 @@
 <template>
   <div class="home">
-    <input type="radio" value="web" v-model="keyword">web
+    <input type="radio" value="web" v-model="keyword" />web
 
-    <input type="radio" value="iphone" v-model="keyword">iphone
+    <input type="radio" value="iphone" v-model="keyword" />iphone
 
-    <input type="radio" value="game" v-model="keyword">game
+    <input type="radio" value="game" v-model="keyword" />game
 
     <div class="container">
       <div class="post" v-for="post in filteredPosts" :key="post.id">
-
         <div class="tag" v-for="tag in post.tags" :key="tag.id">
           {{ tag.name }}
         </div>
@@ -51,23 +50,21 @@ export default {
   },
 
   computed: {
-    filteredPosts: function() {
-      var posts = [];
+    filteredPosts: function () {
+      let posts = []
 
-      for(var i in this.posts) {
-        var post = this.posts[i];
-        for(var j in post.tags){
-        var tag = post.tags[j];
-          if(tag.name.indexOf(this.keyword) !== -1) {
-              posts.push(post);
+      for (let i in this.posts) {
+        let post = this.posts[i]
+        for (let j in post.tags) {
+          let tag = post.tags[j]
+          if (tag.name.indexOf(this.keyword) !== -1) {
+            posts.push(post)
           }
         }
       }
-    return posts;
-
-    }
-  }
-
+      return posts
+    },
+  },
 }
 </script>
 

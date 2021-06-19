@@ -7,7 +7,6 @@
 </template>
 
 <style scoped>
-
 footer {
   color: white;
   height: 30px;
@@ -19,5 +18,4 @@ footer {
   align-items: center;
   justify-content: center;
 }
-
 </style>

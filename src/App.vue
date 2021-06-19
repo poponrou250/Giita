@@ -1,15 +1,13 @@
 <template>
-  <div class="body">
-    <v-app>
-      <!-- componentを利用 -->
-      <Header />
-      <p>ようこそ{{this.$auth.currentUser.displayName}}さん</p>
-      <v-main>
-        <router-view />
-      </v-main>
-      <Footer />
-    </v-app>
-  </div>
+  <v-app>
+    <!-- componentを利用 -->
+    <Header />
+    <p>ようこそ{{ this.$auth.currentUser.displayName }}さん</p>
+    <v-main>
+      <router-view />
+    </v-main>
+    <Footer />
+  </v-app>
 </template>
 
 <script>
@@ -17,17 +15,16 @@ import Header from "@/components/Header.vue"
 import Footer from "@/components/Footer.vue"
 
 export default {
-
   // componentの登録
   components: {
     Header,
-    Footer
-  }
+    Footer,
+  },
 }
 </script>
 
 <style scoped>
-.body{
+.body {
   background-color: aquamarine;
 }
 </style>
