@@ -4,10 +4,18 @@
     <div class="header-list">
       <ul>
         <li><router-link to="/">ホーム</router-link></li>
-        <li v-if="this.$auth.currentUser.displayName!=='ゲスト'"><router-link to="/post">投稿</router-link></li>
-        <li v-if="this.$auth.currentUser.displayName==='ゲスト'"><button v-on:click="signIn">SignIn</button></li>
-        <li v-if="this.$auth.currentUser.displayName!=='ゲスト'"><router-link to="/my-page">マイページ</router-link></li>
-        <li v-if="this.$auth.currentUser.displayName!=='ゲスト'"><button v-on:click="signOut">SingOut</button></li>
+        <li v-if="this.$auth.currentUser.displayName !== 'ゲスト'">
+          <router-link to="/post">投稿</router-link>
+        </li>
+        <li v-if="this.$auth.currentUser.displayName === 'ゲスト'">
+          <button v-on:click="signIn">SignIn</button>
+        </li>
+        <li v-if="this.$auth.currentUser.displayName !== 'ゲスト'">
+          <router-link to="/my-page">マイページ</router-link>
+        </li>
+        <li v-if="this.$auth.currentUser.displayName !== 'ゲスト'">
+          <button v-on:click="signOut">SingOut</button>
+        </li>
       </ul>
     </div>
   </header>
@@ -62,34 +70,37 @@ header li {
 import firebase from "firebase"
 
 export default {
-
   methods: {
     signIn() {
-      var provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth().signInWithPopup(provider)
-      .then((userCredential)=> {
-        alert('Success!');
-        var user = userCredential.user;
-        firebase.firestore().collection("users").doc(user.uid).set({email: user.email, name: user.displayName});
-      })
-      .catch(error => {
+      var provider = new firebase.auth.GoogleAuthProvider()
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then((userCredential) => {
+          alert("Success!")
+          var user = userCredential.user
+          firebase
+            .firestore()
+            .collection("users")
+            .doc(user.uid)
+            .set({ email: user.email, name: user.displayName })
+        })
+        .catch((error) => {
           alert("Error!", error.message)
           console.error("Account Login Error", error.message)
-      })
+        })
     },
     signOut() {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        alert("Logout!");
-      })
-      .catch(error => {
-        alert(error);
-      });
-    }
-  }
-  
-};
-
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          alert("Logout!")
+        })
+        .catch((error) => {
+          alert(error)
+        })
+    },
+  },
+}
 </script>
