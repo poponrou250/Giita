@@ -6,30 +6,21 @@
 
 <script>
 import dedent from "dedent"
-import Vue from "vue"
 import firebase from "firebase"
-import VueQuillEditor from "vue-quill-editor"
-import "quill/dist/quill.core.css"
-import "quill/dist/quill.snow.css"
-import "quill/dist/quill.bubble.css"
-Vue.use(VueQuillEditor)
 export default {
   data() {
     return {
-      content: dedent,
+      content: "",
     }
   },
   created() {
     firebase
       .firestore()
       .collection("posts")
-      .where("code", "==", "a")
+      .doc("d6xbhU1AHoppQlOXqVyV") //  将来的には -> this.$router.params.id
       .get()
-      .then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          this.content = doc.data().text
-          //   console.log(doc.data().text)
-        })
+      .then((doc) => {
+        this.content = dedent(doc.data().text)
       })
   },
 }
