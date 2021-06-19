@@ -1,13 +1,24 @@
 <template>
   <div class="home">
+    <input type="radio" value="web" v-model="keyword">web
+
+    <input type="radio" value="iphone" v-model="keyword">iphone
+
+    <input type="radio" value="game" v-model="keyword">game
+
     <div class="container">
-      <div class="tweet" v-for="tweet in tweets" :key="tweet.id">
+      <div class="post" v-for="post in filteredPosts" :key="post.id">
+
+        <div class="tag" v-for="tag in post.tags" :key="tag.id">
+          {{ tag.name }}
+        </div>
+
         <div class="title">
-          {{ tweet.title }}
+          {{ post.title }}
         </div>
 
         <div class="text">
-          {{ tweet.text }}
+          <!-- {{ post.text }} -->
         </div>
       </div>
     </div>
@@ -20,23 +31,43 @@ import firebase from "firebase"
 export default {
   data() {
     return {
-      tweets: [],
+      keyword: "",
+      posts: [],
     }
   },
   created() {
     firebase
       .firestore()
-      .collection("tweets")
+      .collection("posts")
       .get()
       .then((snapshot) => {
         snapshot.docs.forEach((doc) => {
-          this.tweets.push({
+          this.posts.push({
             id: doc.id,
             ...doc.data(),
           })
         })
       })
   },
+
+  computed: {
+    filteredPosts: function() {
+      var posts = [];
+
+      for(var i in this.posts) {
+        var post = this.posts[i];
+        for(var j in post.tags){
+        var tag = post.tags[j];
+          if(tag.name.indexOf(this.keyword) !== -1) {
+              posts.push(post);
+          }
+        }
+      }
+    return posts;
+
+    }
+  }
+
 }
 </script>
 
@@ -49,7 +80,7 @@ export default {
   margin: 30px auto;
 }
 
-.tweet {
+.post {
   width: 25%;
   margin: 10px;
   padding: 10px;

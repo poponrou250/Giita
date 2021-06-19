@@ -1,13 +1,15 @@
 <template>
-  <v-app>
-    <!-- componentを利用 -->
-    <Header />
-    <p>ようこそ{{this.$auth.currentUser.displayName}}さん</p>
-    <v-main>
-      <router-view />
-    </v-main>
-    <Footer />
-  </v-app>
+  <div class="body">
+    <v-app>
+      <!-- componentを利用 -->
+      <Header />
+      <p>ようこそ{{this.$auth.currentUser.displayName}}さん</p>
+      <v-main>
+        <router-view />
+      </v-main>
+      <Footer />
+    </v-app>
+  </div>
 </template>
 
 <script>
@@ -23,3 +25,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.body{
+  background-color: aquamarine;
+}
+</style>
