@@ -1,7 +1,14 @@
 meta: { requiresAuth: true }
 
 <template>
-  <div class="my-page">
-    <h1>This is my page</h1>
-  </div>
+  <div class="Detail__wrapper"><Detail /></div>
 </template>
+
+<script>
+import Detail from "../components/Detail.vue"
+export default {
+  components: { Detail },
+}
+</script>
+
+<style scoped></style>

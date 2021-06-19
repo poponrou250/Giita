@@ -66,6 +66,7 @@ export default {
         code: this.codeContentText,
         createAt: firebase.firestore.FieldValue.serverTimestamp(),
         tags: this.tags,
+        userId: this.$auth.currentUser.uid,
       }
       firebase
         .firestore()
@@ -97,14 +98,6 @@ export default {
       this.tags.splice(vm.$index, 1)
     },
   },
-  // props: {
-  //   options: {
-  //     type: Object,
-  //   },
-  //   options: {
-  //     type: editorOption,
-  //   },
-  // },
 }
 </script>
 

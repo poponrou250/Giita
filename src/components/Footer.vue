@@ -7,12 +7,10 @@
 </template>
 
 <style scoped>
-
 footer {
   color: white;
   height: 30px;
   background-color: #000;
-  position: absolute;
   bottom: 0;
   height: 50px;
   width: 100%;
@@ -20,5 +18,4 @@ footer {
   align-items: center;
   justify-content: center;
 }
-
 </style>
