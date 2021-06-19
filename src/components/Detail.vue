@@ -1,10 +1,13 @@
 <template>
-  <div v-html="text"></div>
+  <div class="output ql-bubble">
+    <div class="ql-editor" v-html="content"></div>
+  </div>
 </template>
 
 <script>
-import firebase from "firebase"
+import dedent from "dedent"
 import Vue from "vue"
+import firebase from "firebase"
 import VueQuillEditor from "vue-quill-editor"
 import "quill/dist/quill.core.css"
 import "quill/dist/quill.snow.css"
@@ -13,7 +16,7 @@ Vue.use(VueQuillEditor)
 export default {
   data() {
     return {
-      text: [],
+      content: dedent,
     }
   },
   created() {
@@ -24,8 +27,8 @@ export default {
       .get()
       .then((snapshot) => {
         snapshot.docs.forEach((doc) => {
-          this.text.push(doc.data().text)
-          console.log(doc.data().text)
+          this.content = doc.data().text
+          //   console.log(doc.data().text)
         })
       })
   },
