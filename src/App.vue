@@ -2,7 +2,6 @@
   <v-app>
     <!-- componentを利用 -->
     <Header />
-    <p>ようこそ{{ this.$auth.currentUser.displayName }}さん</p>
     <v-main>
       <router-view />
     </v-main>
@@ -24,7 +23,9 @@ export default {
 </script>
 
 <style scoped>
-.body {
-  background-color: aquamarine;
+
+.v-main{
+    background-color: rgb(208, 243, 192);
 }
+
 </style>
