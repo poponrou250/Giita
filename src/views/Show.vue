@@ -17,25 +17,8 @@
 </template>
 
 <script>
-import firebase from "firebase"
 import Detail from "../components/Detail.vue"
 export default {
-  data() {
-    return {
-      keyword: "",
-      post: {},
-    }
-  },
-  created() {
-    firebase
-      .firestore()
-      .collection("posts")
-      .doc(this.$route.params.post_id)
-      .get()
-      .then((doc) => {
-        this.post = doc.data()
-      })
-  },
   components: { Detail },
 }
 </script>

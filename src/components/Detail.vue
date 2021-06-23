@@ -11,8 +11,6 @@ export default {
   data() {
     return {
       content: "",
-      keyword: "",
-      post: {},
     }
   },
   created() {
