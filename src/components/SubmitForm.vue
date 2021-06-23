@@ -49,7 +49,15 @@ export default {
       codeContentText: "",
       moment: null,
       selected: "",
-      options: ["iPhone", "game", "web"],
+      options: [
+        "iPhone",
+        "Game",
+        "Web",
+        "WebExpert",
+        "AI",
+        "UIUX",
+        "VideoEditer",
+      ],
     }
   },
   components: {
