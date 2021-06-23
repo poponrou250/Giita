@@ -11,19 +11,39 @@
           all
       </label>
 
-      <input id="item-2" class="radio-inline__input" type="radio" name="accessible-radio" value="web" v-model="keyword" checked="checked"/>
+      <input id="item-2" class="radio-inline__input" type="radio" name="accessible-radio" value="Web" v-model="keyword" checked="checked"/>
       <label class="radio-inline__label" for="item-2">
-          #web
+          #Web
       </label>
 
-      <input id="item-3" class="radio-inline__input" type="radio" name="accessible-radio" value="iphone" v-model="keyword"/>
+      <input id="item-3" class="radio-inline__input" type="radio" name="accessible-radio" value="iPhone" v-model="keyword"/>
       <label class="radio-inline__label" for="item-3">
-          #iphone
+          #iPhone
       </label>
 
-      <input id="item-4" class="radio-inline__input" type="radio" name="accessible-radio" value="game" v-model="keyword"/>
+      <input id="item-4" class="radio-inline__input" type="radio" name="accessible-radio" value="Game" v-model="keyword"/>
       <label class="radio-inline__label" for="item-4">
-          #game
+          #Game
+      </label>
+
+      <input id="item-5" class="radio-inline__input" type="radio" name="accessible-radio" value="WebExpert" v-model="keyword"/>
+      <label class="radio-inline__label" for="item-5">
+          #WebExpert
+      </label>
+
+      <input id="item-6" class="radio-inline__input" type="radio" name="accessible-radio" value="UIUX" v-model="keyword"/>
+      <label class="radio-inline__label" for="item-6">
+          #UIUX
+      </label>
+
+      <input id="item-7" class="radio-inline__input" type="radio" name="accessible-radio" value="VideoEditor" v-model="keyword"/>
+      <label class="radio-inline__label" for="item-7">
+          #VideoEditor
+      </label>
+
+      <input id="item-8" class="radio-inline__input" type="radio" name="accessible-radio" value="AI" v-model="keyword"/>
+      <label class="radio-inline__label" for="item-8">
+          #AI
       </label>
     </fieldset>
 
@@ -61,12 +81,6 @@ import firebase from "firebase"
 export default {
   data() {
     return {
-      tags : [
-        {name: "web"},
-        {name: "iphone"},
-        {name: "game"},
-        {name: "python"},
-      ],
       keyword: "",
       posts: [],
     }
