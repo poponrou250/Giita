@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>Giita</h1>
+    <h1><router-link to="/">Giita</router-link></h1>
     <div class="header-list">
       <ul>
         <li><router-link to="/">ホーム</router-link></li>
@@ -42,6 +42,11 @@ header {
 
 header a {
   text-decoration: none;
+  transition-duration: 0.3s;
+}
+
+header a:hover {
+  color: red;
 }
 
 header h1 {
