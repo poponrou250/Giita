@@ -17,7 +17,7 @@ export default {
     firebase
       .firestore()
       .collection("posts")
-      .doc("d6xbhU1AHoppQlOXqVyV") //  将来的には -> this.$router.params.id
+      .doc(this.$route.params.post_id) //  将来的には -> this.$router.params.id
       .get()
       .then((doc) => {
         this.content = dedent(doc.data().text)

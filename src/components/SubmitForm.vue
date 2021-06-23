@@ -16,18 +16,10 @@
       v-model="codeContentText"
       placeholder="code"
     />
-    <div class="tag_textarea">
-      <div class="tag-list">
-        <span class="tag" v-for="(tag, key) in tags" :key="key.id">
-          {{ tag.name }}
-          <span class="delete" v-on:click="delete this">x</span>
-        </span>
-      </div>
-      <div
-        class="input-area"
-        contenteditable="true"
-        v-on:keydown.enter="decide_tag"
-      ></div>
+    <div>
+      <h1>Tag</h1>
+      <v-select :options="options" v-model="selected" multiple></v-select>
+      <p>タグ：{{ selected }}</p>
     </div>
     <div class="form__buttons">
       <button v-on:click="postTweet" class="form__submit-button">投稿</button>
@@ -37,12 +29,8 @@
 
 <script>
 import firebase from "firebase"
-import Vue from "vue"
-import VueQuillEditor from "vue-quill-editor"
-import "quill/dist/quill.core.css"
-import "quill/dist/quill.snow.css"
-import "quill/dist/quill.bubble.css"
-Vue.use(VueQuillEditor)
+import vSelect from "vue-select"
+import "vue-select/dist/vue-select.css"
 export default {
   data() {
     return {
@@ -54,8 +42,20 @@ export default {
       },
       codeContentText: "",
       moment: null,
-      tags: [],
+      selected: "",
+      options: [
+        "iPhone",
+        "Game",
+        "Web",
+        "WebExpert",
+        "AI",
+        "UIUX",
+        "VideoEditer",
+      ],
     }
+  },
+  components: {
+    vSelect,
   },
   methods: {
     postTweet() {
@@ -65,7 +65,7 @@ export default {
         text: this.articleContentText,
         code: this.codeContentText,
         createAt: firebase.firestore.FieldValue.serverTimestamp(),
-        tags: this.tags,
+        tags: this.selected,
         userId: this.$auth.currentUser.uid,
       }
       firebase
