@@ -62,7 +62,7 @@
 
         <i class="fas fa-tag"></i>
         <div class="tag" v-for="tag in post.tags" :key="tag.id">
-          #{{ tag.name }} 
+          #{{ tag }} 
         </div>
 
         <div class="link">
@@ -109,7 +109,7 @@ export default {
           const post = this.posts[i]
           for (let j in post.tags) {
             const tag = post.tags[j]
-            if (tag.name === this.keyword) {
+            if (tag === this.keyword) {
               posts.push(post)
               break
             }

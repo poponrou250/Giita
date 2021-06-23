@@ -2,24 +2,44 @@
   <div class="home">
     <div class="container">
       <div class="post">
-        <div class="tag" v-for="tag in post.tags" :key="tag.id">
-          {{ tag.name }}
-        </div>
-
         <div class="title">
           {{ post.title }}
         </div>
 
-        <div class="Detail__wrapper"><Detail /></div>
+        <i class="fas fa-tag"></i>
+        <div class="tag" v-for="tag in post.tags" :key="tag.id">
+          #{{ tag }} 
+        </div>
+
+        <div class="output ql-bubble">
+          <div class="ql-editor" v-html="post.text"></div>
+        </div>
+        
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Detail from "../components/Detail.vue"
+import firebase from "firebase"
 export default {
-  components: { Detail },
+  data() {
+    return {
+      post: {},
+    }
+  },
+
+  created() {
+    firebase
+      .firestore()
+      .collection("posts")
+      .doc(this.$route.params.post_id)
+      .get()
+      .then((doc) => {
+        this.post = doc.data()
+      })
+  },
+
 }
 </script>
 

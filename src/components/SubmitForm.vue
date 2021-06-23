@@ -4,6 +4,13 @@
       <input type="text" v-model="titleText" placeholder="タイトル" />
       <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
     </div>
+
+    <div class="tag__select">
+      <h4><i class="fas fa-tag"></i>Tag</h4>
+      <v-select :options="options" v-model="selected" multiple></v-select>
+      <p>タグ：{{ selected }}</p>
+    </div>
+
     <quill-editor
       class="form__textarea"
       v-model="articleContentText"
@@ -11,16 +18,6 @@
       v-bind:options="editorOption"
       placeholder="記事の内容"
     />
-    <textarea
-      class="form__textarea"
-      v-model="codeContentText"
-      placeholder="code"
-    />
-    <div>
-      <h1>Tag</h1>
-      <v-select :options="options" v-model="selected" multiple></v-select>
-      <p>タグ：{{ selected }}</p>
-    </div>
     <div class="form__buttons">
       <button v-on:click="postTweet" class="form__submit-button">投稿</button>
     </div>
@@ -40,7 +37,6 @@ export default {
       editorOption: {
         theme: "bubble",
       },
-      codeContentText: "",
       moment: null,
       selected: "",
       options: [
@@ -63,7 +59,6 @@ export default {
       const tweet = {
         title: this.titleText,
         text: this.articleContentText,
-        code: this.codeContentText,
         createAt: firebase.firestore.FieldValue.serverTimestamp(),
         tags: this.selected,
         userId: this.$auth.currentUser.uid,
@@ -74,10 +69,12 @@ export default {
         .add(tweet)
         .then((ref) => {
           console.log(this)
+          alert('CreatePost')
           this.tweets.push({
             id: ref.id,
             ...tweet,
           })
+          this.$router.push('/')
         })
         .catch(function (error) {
           console.log("error", error)
@@ -105,7 +102,12 @@ export default {
 .cp_iptxt {
   position: relative;
   width: 27.33%;
-  margin: 10px 3%;
+  margin-top:10px;
+  margin-bottom:10px;
+
+  border: solid 1px;
+  border-color: gray;
+  border-radius: 5px;
 }
 .cp_iptxt input[type="text"] {
   font: 15px/24px sans-serif;
@@ -131,25 +133,43 @@ export default {
 }
 .form__textarea {
   width: 95%;
-  height: calc(1.3rem * 3 + 0.5rem * 70);
+  height: calc(1.3rem * 3 + 0.5rem * 40);
   padding: 0.5rem;
   line-height: 1.3rem;
   border-radius: 5px;
-  border: none;
+  border: solid 1px;
+  border-color: gray;
   resize: none;
 }
 .form__textarea:focus {
   outline: none;
 }
 .form__buttons {
+  margin-top: 20px;
+  width: 95%;
   display: flex;
   justify-content: flex-end;
 }
 
-.tag_textarea {
-  width: auto;
-  height: 20px;
-  background: white;
+.form__buttons button{
+  transition: 0.1s;
+  border: solid 1px;
+  border-radius: 15%;
+}
+
+
+.form__buttons button:hover{
+  background-color: rgb(45, 134, 179);
+  color: white;
+  transform: scale(1.2);
+}
+
+.tag__select {
+  width: 95%;
+}
+
+.tag__select:hover {
+  cursor: pointer;
 }
 
 .tag-list {
