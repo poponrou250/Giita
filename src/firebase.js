@@ -21,6 +21,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 export const db = firebase.firestore()
+export const storage = firebase.storage()
 
 /**
  * Vue.observable を使って、firebase.auth()をVueアプリ全体に共有する。

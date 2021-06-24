@@ -8,10 +8,10 @@
     <fieldset>
       <input id="item-1" class="radio-inline__input" type="radio" name="accessible-radio" value="" v-model="keyword" checked="checked"/>
       <label class="radio-inline__label" for="item-1">
-          all
+          All
       </label>
 
-      <input id="item-2" class="radio-inline__input" type="radio" name="accessible-radio" value="Web" v-model="keyword" checked="checked"/>
+      <input id="item-2" class="radio-inline__input" type="radio" name="accessible-radio" value="Web" v-model="keyword" />
       <label class="radio-inline__label" for="item-2">
           #Web
       </label>
@@ -50,10 +50,21 @@
 
 
     <div class="container">
-      <div class="post" v-for="post in filteredPosts" :key="post.id">
-      
+      <div class="post" v-for="post in filteredPosts.slice().reverse()" :key="post.id">
+      <router-link :to="{ name: 'Show', params: { post_id: post.id } }"
+            >
         <div class="title">
           {{ post.title }}
+        </div>
+
+        <div class = "image">
+          <img :src="post.imageUrl" :width="100" :height="100"/>
+        </div>
+
+        <div class = "createat">
+          {{post.createdAt.toDate().getFullYear()}}年
+          {{Number(post.createdAt.toDate().getMonth())+1}}月
+          {{post.createdAt.toDate().getDate()}}日
         </div>
 
         <div class="text">
@@ -64,12 +75,8 @@
         <div class="tag" v-for="tag in post.tags" :key="tag.id">
           #{{ tag }} 
         </div>
-
-        <div class="link">
-          <router-link :to="{ name: 'Show', params: { post_id: post.id } }"
-            >詳細</router-link
+        </router-link
           >
-        </div>
       </div>
     </div>
   </div>
@@ -89,6 +96,7 @@ export default {
     firebase
       .firestore()
       .collection("posts")
+      .orderBy("createdAt")
       .get()
       .then((snapshot) => {
         snapshot.docs.forEach((doc) => {
@@ -97,6 +105,7 @@ export default {
             ...doc.data(),
           })
         })
+        this.posts
       })
   },
 
@@ -125,6 +134,10 @@ export default {
 </script>
 
 <style scoped>
+
+.home{
+  width: 70%;
+}
 
 .username{
   padding: 20px;
@@ -165,10 +178,10 @@ fieldset {
 
 .container {
   display: flex;
-  justify-content: space-around;
+  
   flex-wrap: wrap;
 
-  margin: 20px auto;
+  margin: 20px;
 }
 
 .post {
@@ -177,7 +190,29 @@ fieldset {
   padding: 10px;
 
   border: solid 2px;
-  border-radius: 15px;
+  border-color: gray;
+  border-radius: 5px;
+
+  box-shadow: 0px 10px 10px -5px rgba(0,0,0,0.3);
+
+  transition: 0.1s;
+}
+
+.post:hover{
+  opacity: 0.8;
+
+  box-shadow: 0px 10px 10px -5px rgba(0,0,0,0.8);
+
+  transform: scale(1.01);
+}
+
+.post a{
+  color: black;
+  text-decoration: none;
+}
+
+.image{
+  text-align: center;
 }
 
 .title {

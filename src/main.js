@@ -10,7 +10,6 @@ import "quill/dist/quill.bubble.css"
 
 import "vue-select/dist/vue-select.css"
 
-
 Vue.use(VueQuillEditor)
 
 Vue.config.productionTip = false
