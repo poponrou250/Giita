@@ -6,6 +6,10 @@
           {{ post.title }}
         </div>
 
+        <div class = "image">
+          <img :src="post.imageUrl" :width="100" :height="100"/>
+        </div>
+
         <i class="fas fa-tag"></i>
         <div class="tag" v-for="tag in post.tags" :key="tag.id">
           #{{ tag }} 
@@ -57,16 +61,19 @@ export default {
   margin: 10px;
   padding: 10px;
 
-  border: solid 2px;
-  border-radius: 15px;
+
 }
 
 .title {
   text-align: center;
 }
+
+.image{
+  text-align: center;
+}
+
 .home {
   margin: 0 auto;
   max-width: 6000px;
-  background-color: rgb(208, 243, 192);
 }
 </style>

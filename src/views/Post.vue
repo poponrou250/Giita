@@ -9,6 +9,17 @@
       <v-select :options="options" v-model="selected" multiple placeholder="Select tags"></v-select>
     </div>
 
+    <div class="image__field">
+      <h4><i class="far fa-image"></i> Thumbnail Image</h4>
+        <input
+          type="file"
+          accept="image/*"
+          :disabled="disabled"
+          @change="onFileChange"
+        />
+      <span>{{ message }}</span>
+    </div>
+
     <quill-editor
       class="form__textarea"
       v-model="articleContentText"
@@ -16,15 +27,6 @@
       v-bind:options="editorOption"
       placeholder="記事の内容"
     />
-
-    <h4><i class="far fa-image"></i> Thumbnail Image</h4>
-      <input
-        type="file"
-        accept="image/*"
-        :disabled="disabled"
-        @change="onFileChange"
-      />
-    <span>{{ message }}</span>
 
     <div class="form__buttons">
       <button v-on:click="postTweet" class="form__submit-button"><i class="fas fa-upload"></i></button>
@@ -42,6 +44,10 @@ export default {
       tweets: [],
       titleText: "",
       articleContentText: "",
+      validation: {
+        titleText: false,
+        articleContentText: false,
+      },
       editorOption: {
         theme: "snow",
       },
@@ -96,22 +102,22 @@ export default {
     },
 
     postTweet() {
-      /* 変更点 */
       const tweet = {
-        title: (this.titleText!== "") ? this.titleText : "You should define a title here",
-        text: (this.articleContentText !== "") ? this.articleContentText : "You should write some text here.",
+        title: (this.titleText!== "") ? this.titleText : "You must define a title here",
+        text: (this.articleContentText !== "") ? this.articleContentText : "You must write some text here.",
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         tags: this.selected,
         imageUrl: this.image,
         userId: this.$auth.currentUser.uid,
       }
-      firebase
+      if(this.titleText !== "" && this.articleContentText !== "" && this.selected !== ""){
+        firebase
         .firestore()
         .collection("posts")
         .add(tweet)
         .then((ref) => {
           console.log(this)
-          alert('CreatePost')
+          alert('Created!')
           this.tweets.push({
             id: ref.id,
             ...tweet,
@@ -121,6 +127,10 @@ export default {
         .catch(function (error) {
           console.log("error", error)
         })
+      }else{
+        alert("タイトル, タグ, テキストを入力してください")
+      }
+
     },
     // v-onでエンターキー押してTagのpush
     decide_tag(e) {
@@ -141,6 +151,31 @@ export default {
 </script>
 
 <style scoped>
+
+.tag__select {
+  width: 95%;
+  margin-bottom: 20px;
+  
+}
+
+.tag__select:hover {
+  cursor: pointer;
+}
+
+.tag-list {
+  display: inline-block;
+  margin-top: 0px;
+}
+
+.tag {
+  padding: 2px;
+  background: rgb(176, 178, 179);
+}
+
+.image__field{
+  margin-bottom: 10px;
+}
+
 .cp_iptxt {
   position: relative;
   width: 27.33%;
@@ -175,12 +210,12 @@ export default {
 
   margin: 0 auto;
   max-width: 6000px;
-  background-color: rgb(236, 255, 227);
+  background-color: rgb(240, 243, 234);
 }
 
 .form__textarea {
   width: 95%;
-  height: calc(1.3rem * 3 + 0.5rem * 40);
+  height: calc(1.3rem * 3 + 0.5rem * 70);
   padding: 0.5rem;
   margin-bottom: 100px;
   line-height: 1.3rem;
@@ -197,7 +232,7 @@ export default {
   justify-content: flex-end;
 
   position:relative;
-  bottom: 50px;
+  bottom: 25px;
 }
 
 .form__buttons button{
@@ -210,31 +245,12 @@ export default {
   transform: scale(1.2);
 }
 
-.tag__select {
-  width: 95%;
-  margin-bottom: 20px;
-  
-}
-
-.tag__select:hover {
-  cursor: pointer;
-}
-
-.tag-list {
-  display: inline-block;
-  margin-top: 0px;
-}
 
 .input-area {
   display: inline-block;
   width: 100px;
   height: 20px;
   background: white;
-}
-
-.tag {
-  padding: 2px;
-  background: rgb(176, 178, 179);
 }
 
 .delete {
