@@ -61,7 +61,7 @@
               >
 
           <div class = "image">
-            <img :src="post.imageUrl" :width="230" :height="200"/>
+            <img :src="post.imageUrl" :width="210" :height="200"/>
           </div>
 
           <div class="post__title">
@@ -148,11 +148,6 @@ export default {
 
 <style scoped>
 
-.home{
-  width: 90%;
-  margin: 0 auto;
-}
-
 .background{
   width: 100%;
   height: 400px;
@@ -217,16 +212,25 @@ fieldset {
 }
 
 .container {
+  width: 90%;
   display: flex;
+  justify-content:space-between;
+  align-items: center;
   
   flex-wrap: wrap;
 
   margin: 20px auto;
 }
 
+.container::after{
+  content:"";
+  display: block;
+  width:30%;
+}
+
 .post {
   width: 30%;
-  margin: 10px auto;
+  margin: 10px;
   padding: 10px;
 
   height: 520px;
@@ -249,14 +253,14 @@ fieldset {
 
   font-size: 28px;
   font-weight: bold;
-  
+
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
 .ql-editor {
-  height: 200px;
+  height: 160px;
 
   overflow: hidden;
 }
