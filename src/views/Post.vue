@@ -42,6 +42,10 @@ export default {
       tweets: [],
       titleText: "",
       articleContentText: "",
+      validation: {
+        titleText: false,
+        articleContentText: false,
+      },
       editorOption: {
         theme: "snow",
       },
@@ -96,7 +100,6 @@ export default {
     },
 
     postTweet() {
-      /* 変更点 */
       const tweet = {
         title: (this.titleText!== "") ? this.titleText : "You should define a title here",
         text: (this.articleContentText !== "") ? this.articleContentText : "You should write some text here.",
@@ -105,13 +108,14 @@ export default {
         imageUrl: this.image,
         userId: this.$auth.currentUser.uid,
       }
-      firebase
+      if(this.titleText !== "" && this.articleContentText !== ""){
+        firebase
         .firestore()
         .collection("posts")
         .add(tweet)
         .then((ref) => {
           console.log(this)
-          alert('CreatePost')
+          alert('Created!')
           this.tweets.push({
             id: ref.id,
             ...tweet,
@@ -121,6 +125,10 @@ export default {
         .catch(function (error) {
           console.log("error", error)
         })
+      }else{
+        alert("タイトルとテキストを入力してください")
+      }
+
     },
     // v-onでエンターキー押してTagのpush
     decide_tag(e) {
