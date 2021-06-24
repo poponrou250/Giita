@@ -1,84 +1,97 @@
 <template>
-  <div class="home">
-
-    <div class = "username">
-      ようこそ<font color="red"><b>{{ this.$auth.currentUser.displayName }}</b></font>さん
+  <div class="home-container">
+    <div class = "background">
+      <p class = "big__title">Giita = GeekSalon専用のQiita</p>
+      <p class = "sub__title">あなたの知恵を未来のために</p>
     </div>
 
-    <fieldset>
-      <input id="item-1" class="radio-inline__input" type="radio" name="accessible-radio" value="" v-model="keyword" checked="checked"/>
-      <label class="radio-inline__label" for="item-1">
-          All
-      </label>
+    <div class = "home">
 
-      <input id="item-2" class="radio-inline__input" type="radio" name="accessible-radio" value="Web" v-model="keyword" />
-      <label class="radio-inline__label" for="item-2">
-          #Web
-      </label>
-
-      <input id="item-3" class="radio-inline__input" type="radio" name="accessible-radio" value="iPhone" v-model="keyword"/>
-      <label class="radio-inline__label" for="item-3">
-          #iPhone
-      </label>
-
-      <input id="item-4" class="radio-inline__input" type="radio" name="accessible-radio" value="Game" v-model="keyword"/>
-      <label class="radio-inline__label" for="item-4">
-          #Game
-      </label>
-
-      <input id="item-5" class="radio-inline__input" type="radio" name="accessible-radio" value="WebExpert" v-model="keyword"/>
-      <label class="radio-inline__label" for="item-5">
-          #WebExpert
-      </label>
-
-      <input id="item-6" class="radio-inline__input" type="radio" name="accessible-radio" value="UIUX" v-model="keyword"/>
-      <label class="radio-inline__label" for="item-6">
-          #UIUX
-      </label>
-
-      <input id="item-7" class="radio-inline__input" type="radio" name="accessible-radio" value="VideoEditor" v-model="keyword"/>
-      <label class="radio-inline__label" for="item-7">
-          #VideoEditor
-      </label>
-
-      <input id="item-8" class="radio-inline__input" type="radio" name="accessible-radio" value="AI" v-model="keyword"/>
-      <label class="radio-inline__label" for="item-8">
-          #AI
-      </label>
-    </fieldset>
-
-
-
-    <div class="container">
-      <div class="post" v-for="post in filteredPosts.slice().reverse()" :key="post.id">
-      <router-link :to="{ name: 'Show', params: { post_id: post.id } }"
-            >
-        <div class="title">
-          {{ post.title }}
-        </div>
-
-        <div class = "image">
-          <img :src="post.imageUrl" :width="100" :height="100"/>
-        </div>
-
-        <div class = "createat">
-          {{post.createdAt.toDate().getFullYear()}}年
-          {{Number(post.createdAt.toDate().getMonth())+1}}月
-          {{post.createdAt.toDate().getDate()}}日
-        </div>
-
-        <div class="text">
-          <!-- {{ post.text }} -->
-        </div>
-
-        <i class="fas fa-tag"></i>
-        <div class="tag" v-for="tag in post.tags" :key="tag.id">
-          #{{ tag }} 
-        </div>
-        </router-link
-          >
+      <div class = "username">
+        ようこそ<font color="#FF4500"><b>{{ this.$auth.currentUser.displayName }}</b></font>さん
       </div>
+
+      <fieldset>
+        <input id="item-1" class="radio-inline__input" type="radio" name="accessible-radio" value="" v-model="keyword" checked="checked"/>
+        <label class="radio-inline__label" for="item-1">
+            All
+        </label>
+
+        <input id="item-2" class="radio-inline__input" type="radio" name="accessible-radio" value="Web" v-model="keyword" />
+        <label class="radio-inline__label" for="item-2">
+            #Web
+        </label>
+
+        <input id="item-3" class="radio-inline__input" type="radio" name="accessible-radio" value="iPhone" v-model="keyword"/>
+        <label class="radio-inline__label" for="item-3">
+            #iPhone
+        </label>
+
+        <input id="item-4" class="radio-inline__input" type="radio" name="accessible-radio" value="Game" v-model="keyword"/>
+        <label class="radio-inline__label" for="item-4">
+            #Game
+        </label>
+
+        <input id="item-5" class="radio-inline__input" type="radio" name="accessible-radio" value="WebExpert" v-model="keyword"/>
+        <label class="radio-inline__label" for="item-5">
+            #WebExpert
+        </label>
+
+        <input id="item-6" class="radio-inline__input" type="radio" name="accessible-radio" value="UIUX" v-model="keyword"/>
+        <label class="radio-inline__label" for="item-6">
+            #UIUX
+        </label>
+
+        <input id="item-7" class="radio-inline__input" type="radio" name="accessible-radio" value="VideoEditor" v-model="keyword"/>
+        <label class="radio-inline__label" for="item-7">
+            #VideoEditor
+        </label>
+
+        <input id="item-8" class="radio-inline__input" type="radio" name="accessible-radio" value="AI" v-model="keyword"/>
+        <label class="radio-inline__label" for="item-8">
+            #AI
+        </label>
+      </fieldset>
+
+
+
+      <div class="container">
+        <div class="post" v-for="post in filteredPosts.slice().reverse()" :key="post.id">
+          <router-link :to="{ name: 'Show', params: { post_id: post.id } }"
+              >
+
+          <div class = "image">
+            <img :src="post.imageUrl" :width="230" :height="200"/>
+          </div>
+
+          <div class="post__title">
+            {{ post.title }}
+          </div>
+
+          <div class = "createdat">
+            {{post.createdAt.toDate().getFullYear()}}年
+            {{Number(post.createdAt.toDate().getMonth())+1}}月
+            {{post.createdAt.toDate().getDate()}}日
+          </div>
+
+            <i class="fas fa-tag"></i>
+          <div class="tag_container">
+            <div class="tag" v-for="tag in post.tags" :key="tag.id">
+              #{{ tag }} 
+            </div>
+          </div>
+
+          <div class="output ql-bubble">
+            <div class="ql-editor" v-html="post.text"></div>
+          </div>
+          </router-link
+            >
+        </div>
+      </div>
+
+      <div id="page_top"><a href="#"></a></div>
     </div>
+
   </div>
 </template>
 
@@ -136,10 +149,37 @@ export default {
 <style scoped>
 
 .home{
-  width: 70%;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.background{
+  width: 100%;
+  height: 400px;
+  background-image: url(~@/assets/background.png);
+  background-size: cover;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+
+}
+
+.big__title{
+  font-size: 50px;
+  font-family: 'RocknRoll One', cursive;
+}
+
+.sub__title{
+  font-size: 30px;
+  font-family: 'RocknRoll One', cursive;
 }
 
 .username{
+  font-size: 25px;
   padding: 20px;
   text-align: center;
 }
@@ -181,13 +221,15 @@ fieldset {
   
   flex-wrap: wrap;
 
-  margin: 20px;
+  margin: 20px auto;
 }
 
 .post {
-  width: 25%;
-  margin: 10px;
+  width: 30%;
+  margin: 10px auto;
   padding: 10px;
+
+  height: 520px;
 
   border: solid 2px;
   border-color: gray;
@@ -196,10 +238,36 @@ fieldset {
   box-shadow: 0px 10px 10px -5px rgba(0,0,0,0.3);
 
   transition: 0.1s;
+
+  overflow: hidden;
+
+}
+
+.post__title{
+  text-align: center;
+  margin: 10px 0px;
+
+  font-size: 28px;
+  font-weight: bold;
+  
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ql-editor {
+  height: 200px;
+
+  overflow: hidden;
+}
+
+.ql-editor p{
+  overflow: hidden;
 }
 
 .post:hover{
   opacity: 0.8;
+  cursor: pointer;
 
   box-shadow: 0px 10px 10px -5px rgba(0,0,0,0.8);
 
@@ -215,11 +283,40 @@ fieldset {
   text-align: center;
 }
 
-.title {
-  text-align: center;
+.createdat{
+  margin: 10px 0;
+  text-align: right;
+
+  flex-wrap: wrap;
 }
-.home {
-  margin: 0 auto;
-  max-width: 6000px;
+
+.tag_container{
+  display: flex;
 }
+
+.tag{
+  margin-right: 5px;
+}
+
+#page_top{
+  width: 60px;
+  height: 60px;
+  position: fixed;
+  right: 0;
+  bottom: 55px;
+  opacity: 0.6;
+}
+#page_top a{
+  width: 60px;
+  height: 60px;
+  text-decoration: none;
+}
+#page_top a::before{
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  content: '\f139';
+  font-size: 50px;
+  color: #3fefee;
+}
+
 </style>

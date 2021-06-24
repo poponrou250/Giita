@@ -24,8 +24,12 @@ export default {
 
 <style scoped>
 
+body{
+  font-family: 'Amatic SC', cursive;
+}
+
 .v-main{
-    background-color: rgb(236, 255, 227);
+    background-color: rgb(240, 243, 234);
 }
 
 </style>

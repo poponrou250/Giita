@@ -14,7 +14,7 @@
           <router-link to="/my-page">マイページ</router-link>
         </li>
         <li v-if="this.$auth.currentUser.displayName !== 'ゲスト'">
-          <button v-on:click="signOut">SingOut</button>
+          <button v-on:click="signOut">LogOut</button>
         </li>
       </ul>
     </div>
@@ -32,7 +32,7 @@
 
 /* Header部分 */
 header {
-  background-color: green;
+  background-color: rgb(105, 228, 105);
   height: 80px;
   font-weight: bold;
   display: flex;
@@ -43,16 +43,16 @@ header {
 header a {
   text-decoration: none;
   color: white;
-  transition-duration: 0.3s;
+  transition-duration: 0.1s;
 }
 
 header button{
   color: white;
-  transition-duration: 0.3s;
+  transition-duration: 0.1s;
 }
 
 header a:hover , header button:hover{
-  color: rgb(230, 213, 213);
+  color: rgb(247, 189, 82);
 }
 
 header h1 {
