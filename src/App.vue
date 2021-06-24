@@ -25,7 +25,7 @@ export default {
 <style scoped>
 
 .v-main{
-    background-color: rgb(208, 243, 192);
+    background-color: rgb(236, 255, 227);
 }
 
 </style>

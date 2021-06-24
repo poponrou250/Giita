@@ -32,7 +32,7 @@
 
 /* Header部分 */
 header {
-  background-color: greenyellow;
+  background-color: green;
   height: 80px;
   font-weight: bold;
   display: flex;
@@ -42,11 +42,17 @@ header {
 
 header a {
   text-decoration: none;
+  color: white;
   transition-duration: 0.3s;
 }
 
-header a:hover {
-  color: red;
+header button{
+  color: white;
+  transition-duration: 0.3s;
+}
+
+header a:hover , header button:hover{
+  color: rgb(230, 213, 213);
 }
 
 header h1 {
