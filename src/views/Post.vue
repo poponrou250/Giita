@@ -109,6 +109,7 @@ export default {
         tags: this.selected,
         imageUrl: this.image,
         userId: this.$auth.currentUser.uid,
+        username: this.$auth.currentUser.displayName
       }
       if(this.titleText !== "" && this.articleContentText !== "" && this.selected !== ""){
         firebase

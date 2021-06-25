@@ -2,7 +2,7 @@
   <div class="home-container">
     <div class = "background">
       <p class = "big__title">Giita = GeekSalon専用のQiita</p>
-      <p class = "sub__title">あなたの知恵を未来のために</p>
+      <p class = "sub__title">あなたの知恵を後輩に伝えよう</p>
     </div>
 
     <div class = "home">
