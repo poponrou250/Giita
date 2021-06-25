@@ -94,7 +94,7 @@ export default {
             .firestore()
             .collection("users")
             .doc(user.uid)
-            .set({ email: user.email, name: user.displayName })
+            .set({ email: user.email, name: user.displayName, liked_posts: []})
         })
         .catch((error) => {
           alert("Error!", error.message)

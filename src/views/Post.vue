@@ -107,6 +107,7 @@ export default {
         text: (this.articleContentText !== "") ? this.articleContentText : "You must write some text here.",
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         tags: this.selected,
+        likes: 0,
         imageUrl: this.image,
         userId: this.$auth.currentUser.uid,
         username: this.$auth.currentUser.displayName

@@ -1,97 +1,158 @@
 <template>
   <div class="home-container">
-    <div class = "background">
-      <p class = "big__title">Giita = GeekSalon専用のQiita</p>
-      <p class = "sub__title">あなたの知恵を後輩に伝えよう</p>
+    <div class="background">
+      <p class="big__title">Giita = GeekSalon専用のQiita</p>
+      <p class="sub__title">あなたの知恵を後輩に伝えよう</p>
     </div>
 
-    <div class = "home">
-
-      <div class = "username">
-        ようこそ<font color="#FF4500"><b>{{ this.$auth.currentUser.displayName }}</b></font>さん
+    <div class="home">
+      <div class="username">
+        ようこそ<font color="#FF4500"
+          ><b>{{ this.$auth.currentUser.displayName }}</b></font
+        >さん
       </div>
 
       <fieldset>
-        <input id="item-1" class="radio-inline__input" type="radio" name="accessible-radio" value="" v-model="keyword" checked="checked"/>
-        <label class="radio-inline__label" for="item-1">
-            All
-        </label>
+        <input
+          id="item-1"
+          class="radio-inline__input"
+          type="radio"
+          name="accessible-radio"
+          value=""
+          v-model="keyword"
+          checked="checked"
+        />
+        <label class="radio-inline__label" for="item-1"> All </label>
 
-        <input id="item-2" class="radio-inline__input" type="radio" name="accessible-radio" value="Web" v-model="keyword" />
-        <label class="radio-inline__label" for="item-2">
-            #Web
-        </label>
+        <input
+          id="item-2"
+          class="radio-inline__input"
+          type="radio"
+          name="accessible-radio"
+          value="Web"
+          v-model="keyword"
+        />
+        <label class="radio-inline__label" for="item-2"> #Web </label>
 
-        <input id="item-3" class="radio-inline__input" type="radio" name="accessible-radio" value="iPhone" v-model="keyword"/>
-        <label class="radio-inline__label" for="item-3">
-            #iPhone
-        </label>
+        <input
+          id="item-3"
+          class="radio-inline__input"
+          type="radio"
+          name="accessible-radio"
+          value="iPhone"
+          v-model="keyword"
+        />
+        <label class="radio-inline__label" for="item-3"> #iPhone </label>
 
-        <input id="item-4" class="radio-inline__input" type="radio" name="accessible-radio" value="Game" v-model="keyword"/>
-        <label class="radio-inline__label" for="item-4">
-            #Game
-        </label>
+        <input
+          id="item-4"
+          class="radio-inline__input"
+          type="radio"
+          name="accessible-radio"
+          value="Game"
+          v-model="keyword"
+        />
+        <label class="radio-inline__label" for="item-4"> #Game </label>
 
-        <input id="item-5" class="radio-inline__input" type="radio" name="accessible-radio" value="WebExpert" v-model="keyword"/>
-        <label class="radio-inline__label" for="item-5">
-            #WebExpert
-        </label>
+        <input
+          id="item-5"
+          class="radio-inline__input"
+          type="radio"
+          name="accessible-radio"
+          value="WebExpert"
+          v-model="keyword"
+        />
+        <label class="radio-inline__label" for="item-5"> #WebExpert </label>
 
-        <input id="item-6" class="radio-inline__input" type="radio" name="accessible-radio" value="UIUX" v-model="keyword"/>
-        <label class="radio-inline__label" for="item-6">
-            #UIUX
-        </label>
+        <input
+          id="item-6"
+          class="radio-inline__input"
+          type="radio"
+          name="accessible-radio"
+          value="UIUX"
+          v-model="keyword"
+        />
+        <label class="radio-inline__label" for="item-6"> #UIUX </label>
 
-        <input id="item-7" class="radio-inline__input" type="radio" name="accessible-radio" value="VideoEditor" v-model="keyword"/>
-        <label class="radio-inline__label" for="item-7">
-            #VideoEditor
-        </label>
+        <input
+          id="item-7"
+          class="radio-inline__input"
+          type="radio"
+          name="accessible-radio"
+          value="VideoEditor"
+          v-model="keyword"
+        />
+        <label class="radio-inline__label" for="item-7"> #VideoEditor </label>
 
-        <input id="item-8" class="radio-inline__input" type="radio" name="accessible-radio" value="AI" v-model="keyword"/>
-        <label class="radio-inline__label" for="item-8">
-            #AI
-        </label>
+        <input
+          id="item-8"
+          class="radio-inline__input"
+          type="radio"
+          name="accessible-radio"
+          value="AI"
+          v-model="keyword"
+        />
+        <label class="radio-inline__label" for="item-8"> #AI </label>
       </fieldset>
 
-
-
       <div class="container">
-        <div class="post" v-for="post in filteredPosts.slice().reverse()" :key="post.id">
-          <router-link :to="{ name: 'Show', params: { post_id: post.id } }"
-              >
+        <div class="posts">
+          <div
+            class="post"
+            v-for="post in filteredPosts.slice().reverse()"
+            :key="post.id"
+          >
+            <router-link :to="{ name: 'Show', params: { post_id: post.id } }">
+              <div class="image">
+                <img :src="post.imageUrl" :width="150" :height="150" />
+              </div>
 
-          <div class = "image">
-            <img :src="post.imageUrl" :width="210" :height="200"/>
-          </div>
+              <div class="post__title">
+                {{ post.title }}
+              </div>
 
-          <div class="post__title">
-            {{ post.title }}
-          </div>
+              <div class="createdat">
+                {{ post.createdAt.toDate().getFullYear() }}年
+                {{ Number(post.createdAt.toDate().getMonth()) + 1 }}月
+                {{ post.createdAt.toDate().getDate() }}日
+              </div>
 
-          <div class = "createdat">
-            {{post.createdAt.toDate().getFullYear()}}年
-            {{Number(post.createdAt.toDate().getMonth())+1}}月
-            {{post.createdAt.toDate().getDate()}}日
-          </div>
+              <i class="fas fa-tag"></i>
+              <div class="tag_container">
+                <div class="tag" v-for="tag in post.tags" :key="tag.id">
+                  #{{ tag }}
+                </div>
+              </div>
 
-            <i class="fas fa-tag"></i>
-          <div class="tag_container">
-            <div class="tag" v-for="tag in post.tags" :key="tag.id">
-              #{{ tag }} 
-            </div>
+              <div class="output ql-bubble">
+                <div class="ql-editor" v-html="post.text"></div>
+              </div>
+            </router-link>
           </div>
+        </div>
 
-          <div class="output ql-bubble">
-            <div class="ql-editor" v-html="post.text"></div>
+        <div class="goodposts">
+          <h3 style="text-align: center;">人気記事Best3</h3>
+          <div
+            class="goodpost"
+            v-for="post in this.goodposts.slice().reverse()"
+            :key="post.id"
+          >
+            <router-link :to="{ name: 'Show', params: { post_id: post.id } }">
+              <div class="image">
+                <img :src="post.imageUrl" :width="150" :height="100" />
+              </div>
+
+              <div class="post__title">
+                {{ post.title }}
+              </div>
+            </router-link>
           </div>
-          </router-link
-            >
         </div>
       </div>
 
       <div id="page_top"><a href="#"></a></div>
     </div>
-
   </div>
 </template>
 
@@ -103,6 +164,7 @@ export default {
     return {
       keyword: "",
       posts: [],
+      goodposts: [],
     }
   },
   created() {
@@ -114,6 +176,22 @@ export default {
       .then((snapshot) => {
         snapshot.docs.forEach((doc) => {
           this.posts.push({
+            id: doc.id,
+            ...doc.data(),
+          })
+        })
+        this.posts
+      })
+
+    firebase
+      .firestore()
+      .collection("posts")
+      .orderBy("likes")
+      .limit(3)
+      .get()
+      .then((snapshot) => {
+        snapshot.docs.forEach((doc) => {
+          this.goodposts.push({
             id: doc.id,
             ...doc.data(),
           })
@@ -147,10 +225,9 @@ export default {
 </script>
 
 <style scoped>
-
-.background{
+.background {
   width: 100%;
-  height: 400px;
+  height: 500px;
   background-image: url(~@/assets/background.png);
   background-size: cover;
 
@@ -160,20 +237,19 @@ export default {
   align-items: center;
 
   color: white;
-
 }
 
-.big__title{
+.big__title {
   font-size: 50px;
-  font-family: 'RocknRoll One', cursive;
+  font-family: "RocknRoll One", cursive;
 }
 
-.sub__title{
+.sub__title {
   font-size: 30px;
-  font-family: 'RocknRoll One', cursive;
+  font-family: "RocknRoll One", cursive;
 }
 
-.username{
+.username {
   font-size: 25px;
   padding: 20px;
   text-align: center;
@@ -187,67 +263,99 @@ fieldset {
 }
 
 .radio-inline__input {
-    clip: rect(1px, 1px, 1px, 1px);
-    position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute !important;
 }
 
 .radio-inline__label {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    margin-right: 18px;
-    border: solid 2px;
-    border-radius: 50%;
-    transition: all .2s;
-    cursor: pointer;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin-right: 18px;
+  border: solid 2px;
+  border-radius: 50%;
+  transition: all 0.2s;
+  cursor: pointer;
 }
 
 .radio-inline__label:hover {
   transform: scale(1.1);
-
 }
 
 .radio-inline__input:checked + .radio-inline__label {
-    background: #139176f4;
-    color: #fff;
+  background: #139176f4;
+  color: #fff;
 }
 
 .container {
   width: 90%;
-  display: flex;
-  justify-content:space-between;
-  align-items: center;
-  
-  flex-wrap: wrap;
-
   margin: 20px auto;
+  display: flex;
+
 }
 
-.container::after{
-  content:"";
-  display: block;
-  width:30%;
+.posts{
+  width: 78%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.post {
-  width: 30%;
-  margin: 10px;
-  padding: 10px;
+.goodposts{
+  width: 22%;
+}
 
-  height: 520px;
+.goodpost{
+  
+  background-color: rgba(255, 242, 198, 0.5);
+  margin: 5px;
+  padding: 5px;
+
+  height: 200px;
 
   border: solid 2px;
   border-color: gray;
   border-radius: 5px;
 
-  box-shadow: 0px 10px 10px -5px rgba(0,0,0,0.3);
+  box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.3);
 
   transition: 0.1s;
 
   overflow: hidden;
-
 }
 
-.post__title{
+.goodpost a {
+  color: black;
+  text-decoration: none;
+}
+
+.goodpost:hover {
+  opacity: 0.8;
+  cursor: pointer;
+
+  box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.8);
+
+  transform: scale(1.01);
+}
+
+.post {
+  background-color: rgba(245, 255, 208, 0.5);
+  width: 30%;
+  margin: 5px;
+  padding: 5px;
+
+  height: 450px;
+
+  border: solid 2px;
+  border-color: gray;
+  border-radius: 5px;
+
+  box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.3);
+
+  transition: 0.1s;
+
+  overflow: hidden;
+}
+
+.post__title {
   text-align: center;
   margin: 10px 0px;
 
@@ -265,44 +373,44 @@ fieldset {
   overflow: hidden;
 }
 
-.ql-editor p{
+.ql-editor p {
   overflow: hidden;
 }
 
-.post:hover{
+.post:hover {
   opacity: 0.8;
   cursor: pointer;
 
-  box-shadow: 0px 10px 10px -5px rgba(0,0,0,0.8);
+  box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.8);
 
   transform: scale(1.01);
 }
 
-.post a{
+.post a {
   color: black;
   text-decoration: none;
 }
 
-.image{
+.image {
   text-align: center;
 }
 
-.createdat{
+.createdat {
   margin: 10px 0;
   text-align: right;
 
   flex-wrap: wrap;
 }
 
-.tag_container{
+.tag_container {
   display: flex;
 }
 
-.tag{
+.tag {
   margin-right: 5px;
 }
 
-#page_top{
+#page_top {
   width: 60px;
   height: 60px;
   position: fixed;
@@ -310,17 +418,16 @@ fieldset {
   bottom: 55px;
   opacity: 0.6;
 }
-#page_top a{
+#page_top a {
   width: 60px;
   height: 60px;
   text-decoration: none;
 }
-#page_top a::before{
-  font-family: 'Font Awesome 5 Free';
+#page_top a::before {
+  font-family: "Font Awesome 5 Free";
   font-weight: 900;
-  content: '\f139';
+  content: "\f139";
   font-size: 50px;
   color: #3fefee;
 }
-
 </style>
